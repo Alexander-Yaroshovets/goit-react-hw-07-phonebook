@@ -2,7 +2,9 @@ import { useState } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { submitContact } from 'store/contactSlice';
+import { addContact } from 'store/operations';
+
+import { selectContacts } from 'store/selectors';
 
 import {
   ContactForm,
@@ -15,10 +17,26 @@ import {
 export const Form = ({ title }) => {
   const dispatch = useDispatch();
 
-  const contacts = useSelector(state => state.contacts.contacts);
+  const contacts = useSelector(selectContacts);
 
   const [name, setname] = useState('');
-  const [number, setnumber] = useState('');
+  const [phone, setphone] = useState('');
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    console.log(event);
+    const newContact = {
+      name,
+      phone,
+    };
+    dispatch(addContact(newContact));
+    reset();
+  };
+
+  const reset = () => {
+    setname('');
+    setphone('');
+  };
 
   const handleInputChange = event => {
     const { name, value } = event.target;
@@ -28,7 +46,7 @@ export const Form = ({ title }) => {
         setname(value);
         break;
       case 'number':
-        setnumber(value);
+        setphone(value);
         break;
       default:
         return;
@@ -44,23 +62,12 @@ export const Form = ({ title }) => {
             setname(value);
             break;
           case 'number':
-            setnumber(value);
+            setphone(value);
             break;
           default:
         }
         return name;
       });
-  };
-
-  const handleSubmit = event => {
-    event.preventDefault();
-    dispatch(submitContact(name, number));
-    reset();
-  };
-
-  const reset = () => {
-    setname('');
-    setnumber('');
   };
 
   return (
@@ -83,7 +90,7 @@ export const Form = ({ title }) => {
         <FormLabel>
           Number
           <FormInput
-            value={number}
+            value={phone}
             type="tel"
             name="number"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"

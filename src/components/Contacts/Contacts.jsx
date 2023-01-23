@@ -1,6 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux';
 
-import { hendleDeleteContact } from 'store/contactSlice';
+import { deleteContact } from 'store/operations';
+
+import { selectContacts, selectFilter } from 'store/selectors';
 
 import PropTypes from 'prop-types';
 
@@ -14,18 +16,18 @@ import {
 } from './Contacts.styled';
 
 export const Contacts = ({ title }) => {
-  const contacts = useSelector(state => state.contacts.contacts);
+  const contacts = useSelector(selectContacts);
 
   const dispatch = useDispatch();
 
-  const filterValue = useSelector(state => state.contacts.filter);
+  const filterValue = useSelector(selectFilter);
 
   const getFilterdContact = () => {
     const normalizedFilter = filterValue.toLowerCase();
 
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter)
-    );
+    return contacts.filter(contact => {
+      return contact.name.toLowerCase().includes(normalizedFilter);
+    });
   };
 
   const filteredContacts = getFilterdContact();
@@ -35,15 +37,15 @@ export const Contacts = ({ title }) => {
       <ContactTitle>{title}</ContactTitle>
 
       <CotactList>
-        {contacts &&
-          filteredContacts.map(({ id, name, number }) => {
+        {contacts.length > 0 &&
+          filteredContacts.map(({ id, name, phone }) => {
             return (
               <ContactItem key={id}>
                 <ContactName>{name}:</ContactName>
-                <ContactNumber>{number}</ContactNumber>
+                <ContactNumber>{phone}</ContactNumber>
                 <ContactButton
                   type="button"
-                  onClick={() => dispatch(hendleDeleteContact(id))}
+                  onClick={() => dispatch(deleteContact(id))}
                 >
                   delete
                 </ContactButton>

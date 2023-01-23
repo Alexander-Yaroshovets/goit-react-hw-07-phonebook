@@ -1,15 +1,16 @@
 import React from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { FilterInput, FilterLabel } from './Filter.stayled';
 
-import { hendleChangeContact } from 'store/contactSlice';
-
+import { hendleChangeContact } from 'store/filterSlice';
+import { selectFilter } from 'store/selectors';
 export const Filter = () => {
   const dispatch = useDispatch();
 
-  const value = useSelector(state => state.contacts.filter.value);
+  const value = useSelector(selectFilter);
+  console.log(value);
 
   const hendelInput = event => {
     dispatch(hendleChangeContact(event.target.value));
