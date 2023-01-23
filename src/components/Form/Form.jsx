@@ -2,9 +2,9 @@ import { useState } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { addContact } from 'store/operations';
+import { addContact } from 'redux/operations';
 
-import { selectContacts } from 'store/selectors';
+import { selectContacts } from 'redux/selectors';
 
 import {
   ContactForm,

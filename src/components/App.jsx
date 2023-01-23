@@ -6,8 +6,8 @@ import { Filter } from './Filter';
 
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchContacts } from 'store/operations';
-import { selectIsLoading, selectError } from 'store/selectors';
+import { fetchContacts } from 'redux/operations';
+import { selectIsLoading, selectError } from 'redux/selectors';
 
 export const App = () => {
   const dispatch = useDispatch();

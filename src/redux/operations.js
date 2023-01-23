@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 const BASE_URL = 'https://63ca6191f36cbbdfc75715f9.mockapi.io';
