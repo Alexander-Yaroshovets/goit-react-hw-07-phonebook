@@ -16,9 +16,9 @@ import {
 } from './Contacts.styled';
 
 export const Contacts = ({ title }) => {
-  const contacts = useSelector(selectContacts);
-
   const dispatch = useDispatch();
+
+  const contacts = useSelector(selectContacts);
 
   const filterValue = useSelector(selectFilter);
 
@@ -37,7 +37,7 @@ export const Contacts = ({ title }) => {
       <ContactTitle>{title}</ContactTitle>
 
       <CotactList>
-        {contacts.length > 0 &&
+        {contacts &&
           filteredContacts.map(({ id, name, phone }) => {
             return (
               <ContactItem key={id}>

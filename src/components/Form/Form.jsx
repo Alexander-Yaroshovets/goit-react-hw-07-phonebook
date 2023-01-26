@@ -24,7 +24,7 @@ export const Form = ({ title }) => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log(event);
+
     const newContact = {
       name,
       phone,

@@ -10,7 +10,6 @@ export const Filter = () => {
   const dispatch = useDispatch();
 
   const value = useSelector(selectFilter);
-  console.log(value);
 
   const hendelInput = event => {
     dispatch(hendleChangeContact(event.target.value));

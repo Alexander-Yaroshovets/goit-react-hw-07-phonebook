@@ -5,8 +5,11 @@ import { Contacts } from './Contacts';
 import { Filter } from './Filter';
 
 import { useEffect } from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
+
 import { fetchContacts } from 'redux/operations';
+
 import { selectIsLoading, selectError } from 'redux/selectors';
 
 export const App = () => {
